@@ -1,0 +1,79 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include<stdint.h>
+
+// Implenation of trees in the C programming langauge. Used for  educational purposes.
+
+// Data Stuructres decleartions
+//Enum, as to automate setting values.
+enum ValueType{
+	 i,
+	 ui,
+	 f,
+	 c,
+};
+
+//Value is the acutal value a ndoe is stroign. It's made into a union, as to allow the tree to ipmlment multiple primitives.
+  union Value{
+    int i;
+    unsigned int ui;
+    float f;
+    char c;
+    // Worry about this later. char str[20];
+  } Value;
+
+
+// A node is the fundemtainal building block of a tree.
+struct Node {
+  //number used to sort the  tree.
+  unsigned int Key;
+
+  //To allow for multiple values
+  union Value value;
+  //To specify whihc type of value the tree uses
+  enum ValueType valType;
+
+  //Setting up the links in teh tree.
+  struct Node *left;
+  struct Node *right;
+  struct Node *parent;
+}Node;
+
+
+//Functions decleartions.
+
+/// Node Functionals
+
+////BC: take in node, and what is the valuetype: PC: Node is initlzied wiht it's value
+void newNode(struct Node* node, enum ValueType type){
+  node->valType=type;
+}
+
+
+void printValue(struct Node* node){
+  switch(node->valType){
+  case i: printf("Key: %d\tValue: %d",node->Key,node->value.i ); break;
+  case ui: printf("Key: %d\tValue: %d",node->Key,node->value.ui ); break;
+  case f: printf("Key: %d\tValue: %d",node->Key,node->value.f ); break;
+  case c: printf("Key: %d\tValue: %d",node->Key,node->value.c ); break;
+  }
+  
+}
+////BC: Takes in a node and posssiple value. PC: Node is intilzed with the current value.
+void setValue(struct Node* node, union Value value){
+  switch(node->valType){
+  case i: node->value.i=value.i; break;
+  case ui: node->value.ui=value.ui; break;
+  case f: node->value.f=value.f; break;
+  case c: node->value.c=value.c; break;
+  }
+  
+}
+
+
+
+// Tree Functions
+
+
+
+  

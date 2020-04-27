@@ -1,0 +1,68 @@
+* Specifications
+** Non-Actions
+*** Assumption
+*** User Interface
+*** End Goal
+    Create data structures library in C/proper C-style, while minimize the time/space.
+    - Linked List :: Nodes that are connected between each other in the first level.
+      - Stack :: a linked list, where you push eleemnts on top, and pop elements on the top as well
+      - Queue :: a linked list, where you push eleemnts on top, and pop elements from the bottom
+    - Graph :: A linked list where each link can have multiple links
+      * Binary Tree :: A subset of Graphs, where ecah node only has two links.
+	+ BST :: A binary search tree is a tree in which each element has it's left children lower value than the parent node, and the right children have a higher value than the parent.
+	+ Splay :: A splay tree is where each node you search, delete or insert gets sent to the node.
+	+ Heap :: A binary tree in which the parent node si the min/maxium value of the tree. 
+    - Hash :: A mapping to an array, what it does is takes a key, encodes it to an index to an array, than maps it to the array.
+** Node 
+*** Functionalty
+    A node, which has a generic value type, and links to other nodes in the data sturcutre, unless it's a hash. Otherwise, it's used by pretty much every type of list.
+    - Value :: What is the type of data
+*** Input
+*** Process
+*** Output
+
+* TestPlan
+** Node 
+- [ ] Name of Test :: Descrption
+  + Input ::
+  + Expected Output ::
+  + Actual Output ::
+** User Interface
+- [ ] Name of Test :: Descrption
+  + Input ::
+  + Expected Output ::
+  + Actual Output ::
+
+* Algorihtm
+** Node 
+*** Functional Overview
+    #+BEGIN_SRC plantuml :file ProgramOverview.png
+      start
+	      note left: This is the functioanltiy of the program.
+	      :Print "Format of a function";
+      end
+      #+END_SRC 
+*** Class Diagram
+    #+BEGIN_SRC plantuml :file ClassDiagram.png
+      class Name{
+	    type name : (Descrption)
+	    --
+	    return Fun(Paramets) : Description
+
+      }
+      #+END_SRC 
+*** User Interface
+    #+BEGIN_SRC plantuml :file UserInterface.png
+    @startsalt{
+    Just plain text
+    [This is my button]
+    ()  Unchecked radio
+    (X) Checked radio
+    []  Unchecked box
+    [X] Checked box
+    "Enter text here   "
+    ^This is a droplist^
+
+    }
+    #+END_SRC plantu
+

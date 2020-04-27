@@ -1,0 +1,5 @@
+all:
+	gcc Main.c -o run
+	./run 
+	rm run
+

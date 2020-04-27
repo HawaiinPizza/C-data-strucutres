@@ -1,0 +1,53 @@
+* Specifications
+** Non-Actions
+*** Assumption
+*** User Interface
+**  (Set of actions)
+*** Input
+*** Process
+*** Output
+
+* TestPlan
+**  (Set of Actions)
+- [ ] Name of Test :: Descrption
+  + Input ::
+  + Expected Output ::
+  + Actual Output ::
+** User Interface
+- [ ] Name of Test :: Descrption
+  + Input ::
+  + Expected Output ::
+  + Actual Output ::
+
+* Algorihtm
+**  (Set of Actions)
+*** Functional Overview
+    #+BEGIN_SRC plantuml :file ProgramOverview.png
+      start
+	      note left: This is the functioanltiy of the program.
+	      :Print "Format of a function";
+      end
+      #+END_SRC 
+*** Class Diagram
+    #+BEGIN_SRC plantuml :file ClassDiagram.png
+      class Name{
+	    type name : (Descrption)
+	    --
+	    return Fun(Paramets) : Description
+
+      }
+      #+END_SRC 
+*** User Interface
+    #+BEGIN_SRC plantuml :file UserInterface.png
+    @startsalt{
+    Just plain text
+    [This is my button]
+    ()  Unchecked radio
+    (X) Checked radio
+    []  Unchecked box
+    [X] Checked box
+    "Enter text here   "
+    ^This is a droplist^
+
+    }
+    #+END_SRC plantu

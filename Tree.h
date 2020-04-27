@@ -2,124 +2,16 @@
 #include<stdio.h>
 #include<stdint.h>
 #include <stdbool.h>
-
-//For colring purposes
-#define ANSI_COLOR_RED "\x1b[31m"
-#define ANSI_COLOR_GREEN "\x1b[32m"
-#define ANSI_COLOR_YELLOW "\x1b[33m"
-#define ANSI_COLOR_BLUE "\x1b[34m"
-#define ANSI_COLOR_MAGENTA "\x1b[35m"
-#define ANSI_COLOR_CYAN "\x1b[36m"
-#define ANSI_COLOR_RESET "\x1b[0m"
+#include "Node.h"
+#include "Stack.h"
 
 
-// Implenation of trees in the C programming langauge. Used for  educational purposes.
-
-// Data Stuructres decleartions
-//Enum, as to automate setting values.
-enum ValueType{
-     i,
-     ui,
-     f,
-     c,
-};
-
-//Value is the acutal value a ndoe is stroign. It's made into a union, as to allow the tree to ipmlment multiple primitives.
-union Value{
-     int i;
-     unsigned int ui;
-     float f;
-     char c;
-     // Worry about this later. char str[20];
-} Value;
-
-
-// A node is the fundemtainal building block of a tree.
-struct Node {
-     //number used to sort the  tree.
-     unsigned int Key;
-
-     //To allow for multiple values
-     union Value value;
-     //To specify whihc type of value the tree uses
-     enum ValueType type;
-
-     //Setting up the links in teh tree.
-     struct Node *left;
-     struct Node *right;
-     struct Node *parent;
-}Node;
-
-
-//Functions decleartions.
-
-/// Node Functionals
-
-////BC: take in node, and what is the valuetype: PC: Node is initlzied wiht it's value
-struct Node* newNode(struct Node* node, int key, enum ValueType type){
-     node=malloc(sizeof(node));
-     node->Key=key;
-     node->type=type;
-     node->left=malloc(sizeof(node));
-     node->right=malloc(sizeof(node));
-     node->left=NULL;
-     node->right=NULL;
-     return node;
-}
-
-
-void printNode(struct Node* node){
-     switch(node->type){
-     case i: printf ("Key: %d\tValue: %d\n",node->Key,node->value.i ); break;
-     case ui: printf("Key: %d\tValue: %d\n",node->Key,node->value.ui ); break;
-     case f: printf ("Key: %d\tValue: %d\n",node->Key,node->value.f ); break;
-     case c: printf ("Key: %d\tValue: %d\n",node->Key,node->value.c ); break;
-     }
-}
-
-void printNodePretty(struct Node* node){
-     switch(node->type){
-     case i: printf (ANSI_COLOR_BLUE"Key: %d\t" ANSI_COLOR_YELLOW"Value: %d\n",node->Key,node->value.i ); break;
-     case ui: printf(ANSI_COLOR_BLUE"Key: %d\t" ANSI_COLOR_YELLOW"Value: %d\n",node->Key,node->value.ui ); break;
-     case f: printf (ANSI_COLOR_BLUE"Key: %d\t" ANSI_COLOR_YELLOW"Value: %d\n",node->Key,node->value.f ); break;
-     case c: printf (ANSI_COLOR_BLUE"Key: %d\t" ANSI_COLOR_YELLOW"Value: %d\n",node->Key,node->value.c ); break;
-     }
-}
-
-////BC: Takes in a node and posssiple value. PC: Node is intilzed with the current value.
-void setNodeValue(struct Node* node, union Value NodeVal){
-     switch(node->type){
-     case i:
-	  node->value.i=NodeVal.i; break;
-     case ui:
-	  node->value.ui=NodeVal.ui; break;
-     case f:
-	  node->value.f=NodeVal.f; break;
-     case c:
-	  node->value.c=NodeVal.c; break;
-     }
-  
-}
-
-//Creates a link between the two nodes. 
-void setNodeLink(struct Node* parentNode, struct Node* childNode, bool isLeft){
-     childNode->parent=parentNode;
-     if(isLeft)
-	  parentNode->left=childNode;
-     else{
-	  parentNode->right=childNode;
-     }
-
-}
-
-
-//Tree/Nodes Operatoins
+//Tree
 
 void printNodeChildren(struct Node* node, int count){
      if(node!=NULL){
 	  for(int i=0; i<count; i++){
-	    printf("\t");
-	    
+	       printf("\t");
 	  }
 	  count++;
 	  printNode(node);
@@ -138,14 +30,86 @@ void printTree(struct Node* node){
      printNodeChildren(node, 0);
 }
 
-void createNodeChild(struct Node* parent, int key, union Value NodeVal, bool isLeft){
-  //struct Node* newNode(struct Node* node, int key, enum ValueType type){
-  struct Node* child=newNode(child, key, parent->type);
-  setNodeValue(child, NodeVal);
-  if(isLeft) parent->left=child; else parent->right=child;
+
+static void getTreeSizeRecv(struct Node* node, int* count){
+     *count=*count+1;
+     if(node!=NULL){
+	  //count=&swap;
+	  if(node->right!=NULL){
+	       getTreeSizeRecv(node->right,count);
+	  }
+	  if(node->left!=NULL){
+	       getTreeSizeRecv(node->left,count);
+	  }
+     }
 }
 
-void createBulkNodeChild(struct Node* parent, int key, union Value* NodeVal){
+static int getTreeSizeIter(struct Node* node){
+     int count=0;
+     struct Node* stackNode=newNode(stackNode, node->type);
+     bool isLeft=true;
+     struct Node* temp=newNode(temp, node->type);
+     temp=node;
+
+     //REaliezed error in code: need to modify pushStack as to be able to take in nodes as well as values
+     /*
+     //Goes through the list. Each ndoe it finds, it adds to the stack.
+     //When it needs to go backwards, goes through the stack.
+     while ( sizeStack(stackNode)>0 || isRight){
+	  //If there's a node, add to stack, incremnet count, and than go to it's left child
+	  if(temp){
+	       union Value NodeVal;
+	       switch (node->type){
+	       case i: NodeVal.i=node->value.i; break;
+	       case ui: NodeVal.ui=node->value.ui; break;
+	       case f: NodeVal.f=node->value.f; break;
+	       case c: NodeVal.c=node->value.c; break;
+	       }
+	       pushStack(temp);
+	       count++;
+	       temp=temp->left;
+	  }
+	  //if there is no node, keep going back and go through the right of the children till you find a non-null children. than repeat step above.
+	  else{
+	       while(sizeStack(stackNode)>0){
+		    temp=popStack(stackNode);
+	       }
+	  }
+
+
+	  
+     }
+     */
+     
+
+     return count;
+}
+int getTreeSize(struct Node* node){
+     /*
+       int *count=malloc(sizeof(count));
+       int count=getTreeSizeRecv(node);
+       printf("Coutn size%d\n",*count);
+       return *count;
+     */
+     int count=getTreeSizeIter(node);
+     return -1;
+  
+     
+}
+
+
+void createNodeChild(struct Node* parent, union Value NodeVal, bool isLeft){
+     //struct Node* newNode(struct Node* node, int key, enum ValueType type){
+     struct Node* child=newNode(child, parent->type);
+     setNodeValue(child, NodeVal);
+     if(isLeft) parent->left=child; else parent->right=child;
+}
+
+// Creates a bunch of nodes in the tree for testing purposes
+void createBulkNodeChild(struct Node* parent,  union Value* NodeVal, int size){
+     for(int i=0; i<size; i++){
+    
+     }
   
 }
 

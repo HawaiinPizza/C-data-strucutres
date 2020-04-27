@@ -1,0 +1,13 @@
+#include<stdlib.h>
+#include<stdio.h>
+#include "Tree.h"
+
+
+int main(){
+  struct Node* temp=malloc(sizeof(temp));
+  /*
+  temp->Key=5;
+  temp->value.i=9;
+  printf("Temp's key is %d", temp->value);
+  */
+}

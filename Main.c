@@ -1,49 +1,82 @@
 #include<stdlib.h>
 #include<stdio.h>
 #include "Tree.h"
+#include<assert.h>
 
 
 
 
-int main(){
-     struct Node* root=newNode(root, 1, i);
+int mainTree(){
+  struct Node* root;
+  newNode(root,  i);
+  union Value NodeVal;
+  //deleteNode(root);
+
+  NodeVal.i=1;
+  setNodeValue(root, NodeVal);
+
+  NodeVal.i=2;
+  createNodeChild(root,  NodeVal, false);
+  createNodeChild(root,  NodeVal, true);
+
+  NodeVal.i=3;
+  createNodeChild(root->left,  NodeVal, false);
+  createNodeChild(root->left,  NodeVal, true);
+
+  NodeVal.i=4;
+  createNodeChild(root->right,  NodeVal, false);
+  createNodeChild(root->right,  NodeVal, true);
+
+  NodeVal.i=5;
+  createNodeChild(root->left->left, NodeVal, false);
+  createNodeChild(root->left->left, NodeVal, true);
+     
+  NodeVal.i=6;
+  createNodeChild(root->left->right, NodeVal, false);
+  createNodeChild(root->left->right, NodeVal, true);
+
+  NodeVal.i=7;
+  createNodeChild(root->right->left, NodeVal, false);
+  createNodeChild(root->right->left, NodeVal, true);
+     
+  NodeVal.i=8;
+  createNodeChild(root->right->right, NodeVal, false);
+  createNodeChild(root->right->right, NodeVal, true);
+
+  assert(getTreeSize(root)==15);
+
+
+  
+
+}
+
+int mainStack(){
+     struct Node* root=newNode(root, i);
      union Value NodeVal;
+
      NodeVal.i=1;
      setNodeValue(root, NodeVal);
 
-     NodeVal.i=2;
-     createNodeChild(root, 2, NodeVal, false);
-     createNodeChild(root, 3, NodeVal, true);
-
-     NodeVal.i=3;
-     createNodeChild(root->left, 4, NodeVal, false);
-     createNodeChild(root->left, 5, NodeVal, true);
-
-     NodeVal.i=4;
-     createNodeChild(root->right, 6, NodeVal, false);
-     createNodeChild(root->right, 7, NodeVal, true);
-
-     NodeVal.i=5;
-     createNodeChild(root->left->left,8, NodeVal, false);
-     createNodeChild(root->left->left,9, NodeVal, true);
-     
-     NodeVal.i=6;
-     createNodeChild(root->left->right,10, NodeVal, false);
-     createNodeChild(root->left->right,11, NodeVal, true);
-
-     NodeVal.i=7;
-     createNodeChild(root->right->left,12, NodeVal, false);
-     createNodeChild(root->right->left,13, NodeVal, true);
-     
-     NodeVal.i=8;
-     createNodeChild(root->right->right,14, NodeVal, false);
-     createNodeChild(root->right->right,15, NodeVal, true);
+     pushStack(root, NodeVal);
+     pushStack(root, NodeVal);
+     pushStack(root, NodeVal);
+     assert(sizeStack(root)==4);
      /*
+     NodeVal.i++; createNodeChild(root,  NodeVal, false);
+     NodeVal.i++; createNodeChild(root->right,  NodeVal, false);
+     NodeVal.i++; createNodeChild(root->right->right,  NodeVal, false);
+     NodeVal.i++; createNodeChild(root->right->right->right,  NodeVal, false);
      */
 
+     printStack(root);
+     //printTree(root);
+     
 
-     printTree(root);
-  
-  
+     return -1;
+}
 
+int main(){
+     mainTree();
+//     mainStack();
+     
 }
