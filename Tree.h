@@ -92,7 +92,7 @@ int getTreeSize(struct Node* node){
        return *count;
      */
      int count=getTreeSizeIter(node);
-     return -1;
+     return count;
   
      
 }
