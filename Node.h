@@ -64,9 +64,10 @@ struct Node* newNode(struct Node* node, enum ValueType type){
   node->left=malloc(sizeof(node));
   node->right=malloc(sizeof(node));
   node->parent=malloc(sizeof(node));
-  node->left=node->links[0] ;
-  node->right=node->links[1] ;
-  node->parent=node->links[2] ;
+
+  node->links[0]= node->left ;
+  node->links[1]= node->right ;
+  node->links[2]= node->parent ;
 
 
   node->left=NULL;
@@ -77,48 +78,48 @@ struct Node* newNode(struct Node* node, enum ValueType type){
 }
 
 void deleteNode(struct Node* node){
-     free(node->left);
-     node->left=NULL;
-     free(node->right);
-     node->right=NULL;
-     free(node);
-     node=NULL;
+	free(node->left);
+	node->left=NULL;
+	free(node->right);
+	node->right=NULL;
+	free(node);
+	node=NULL;
 }
 
 
 //BC: Takes in a node and posssiple value. PC: Node is intilzed with the current value.
 void setNodeValue(struct Node* node, union Value NodeVal){
-  switch(node->type){
-  case i: node->value.i=NodeVal.i; break;
-  case ui: node->value.ui=NodeVal.ui; break;
-  case f: node->value.f=NodeVal.f; break;
-  case c: node->value.c=NodeVal.c; break;
-  }
+	switch(node->type){
+		case i: node->value.i=NodeVal.i; break;
+		case ui: node->value.ui=NodeVal.ui; break;
+		case f: node->value.f=NodeVal.f; break;
+		case c: node->value.c=NodeVal.c; break;
+	}
 }
 
 
 //Creates a link between the two nodes. 
 void setNodeLink(struct Node* parentNode, struct Node* childNode, bool isLeft){
-  childNode->parent=parentNode;
-  if(isLeft) parentNode->left=childNode;
-  else parentNode->right=childNode;
+	childNode->parent=parentNode;
+	if(isLeft) parentNode->left=childNode;
+	else parentNode->right=childNode;
 }
 
 
 void printNode(struct Node* node){
-  switch(node->type){
-  case i: printf ("Value: %d\n",node->value.i ); break;
-  case ui: printf("Value: %d\n",node->value.ui ); break;
-  case f: printf ("Value: %d\n",node->value.f ); break;
-  case c: printf ("Value: %d\n",node->value.c ); break;
-  }
+	switch(node->type){
+		case i: printf ("Value: %d\n",node->value.i ); break;
+		case ui: printf("Value: %d\n",node->value.ui ); break;
+		case f: printf ("Value: %d\n",node->value.f ); break;
+		case c: printf ("Value: %d\n",node->value.c ); break;
+	}
 }
 
 void printNodePretty(struct Node* node){
-  switch(node->type){
-  case i: printf (ANSI_COLOR_BLUE"Value: %d\n",node->value.i ); break;
-  case ui: printf(ANSI_COLOR_BLUE"Value: %d\n",node->value.ui ); break;
-  case f: printf (ANSI_COLOR_BLUE"Value: %d\n",node->value.f ); break;
-  case c: printf (ANSI_COLOR_BLUE"Value: %d\n",node->value.c ); break;
-  }
+	switch(node->type){
+		case i: printf (ANSI_COLOR_BLUE"Value: %d\n",node->value.i ); break;
+		case ui: printf(ANSI_COLOR_BLUE"Value: %d\n",node->value.ui ); break;
+		case f: printf (ANSI_COLOR_BLUE"Value: %d\n",node->value.f ); break;
+		case c: printf (ANSI_COLOR_BLUE"Value: %d\n",node->value.c ); break;
+	}
 }

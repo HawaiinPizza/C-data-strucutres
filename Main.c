@@ -7,8 +7,7 @@
 
 
 int mainTree(){
-  struct Node* root;
-  newNode(root,  i);
+  struct Node* root= newNode(root,  i);
   union Value NodeVal;
   //deleteNode(root);
 
